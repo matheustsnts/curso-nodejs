@@ -7,8 +7,6 @@ services:
     container_name: node-app
     volumes:
       - .:/app
-    ports:
-      - "3000:3000"
     networks:
       - node-network
     working_dir: /app  # Adicionado o diretório de trabalho
@@ -22,16 +20,20 @@ services:
       - "8080:80"
     networks:
       - node-network
+    depends_on:
+      - app
 
   postgres:
     image: postgres
     container_name: node-postgres
     # volumes:
     #   - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     networks:
       - node-network
 
@@ -39,8 +41,8 @@ services:
     image: dpage/pgadmin4
     container_name: node-pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: adminpassword
+      PGADMIN_DEFAULT_EMAIL: admin@node.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
     networks:

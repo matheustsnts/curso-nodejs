@@ -10,11 +10,11 @@ WORKDIR /app
 # # Instale as dependências
 # RUN npm install
 
-# # Copie o restante do código-fonte para o diretório de trabalho
-# COPY . .
+#  Copie o restante do código-fonte para o diretório de trabalho
+COPY . .
 
-# Exponha a porta 3000 (ajuste conforme necessário)
-EXPOSE 3000
+# # Exponha a porta 3000 (ajuste conforme necessário)
+# EXPOSE 3000
 
 # Comando para iniciar o aplicativo
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
